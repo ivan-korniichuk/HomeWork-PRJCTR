@@ -3,7 +3,7 @@
 const userNames = ["Петрик Ольга Іванівна", "Гнатюк Петро Антонович", "Рудко Андрій Опанасович"];
 let initials = userNames.map((userName) => {
     userName = userName.split(' ').map((name) => {
-        return name.split('', 1);
+        return name[0];
     });
     return userName.join('.');
 });
@@ -27,8 +27,7 @@ const resultsArray = [1, 2, [3, [4]]];
 let productOfArray;
 
 let flatResultsArray = resultsArray.flat(Infinity);
-const init = 1;
 
-productOfArray = flatResultsArray.reduce((prev, current) => {return prev * current}, init);
+productOfArray = flatResultsArray.reduce((prev, current) => prev * current);
 
 console.log(productOfArray);
