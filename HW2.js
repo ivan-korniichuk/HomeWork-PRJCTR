@@ -38,9 +38,43 @@ const priceData = {
     BANANAS: "48",
     oRAngGEs: "48.7584", 
 };
-
-console.log(optimizer(priceData));
     
 function optimizer(data) {
-    return Object.fromEntries(Object.entries(data).reverse());
+    return Object.fromEntries(
+        Object.entries(data).map(([key, value]) => [key.toLowerCase(), parseFloat(value).toFixed(2)]));
 }
+
+let updatedPriceData = optimizer(priceData);
+console.log(updatedPriceData)
+
+//#3
+
+function recursiveOddSumTo(number) {
+    if(number % 2 === 0) {
+        number--;
+    }
+    
+    if(number === 1){
+        return 1;
+    }
+    return number + recursiveOddSumTo(number-2);
+}
+
+console.log(recursiveOddSumTo(10));
+
+function iterativeOddSumTo(number) {
+    let result = 0;
+
+    if(number % 2 === 0) {
+        number--;
+    }
+
+    while (number >= 1){
+        result += number;
+        number -= 2;
+    }
+    return result;
+}
+
+console.log(iterativeOddSumTo(10
+    ));
