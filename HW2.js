@@ -5,26 +5,25 @@ console.log(durationBetweenDates("31 Jan 2022", "03 Feb 2021", "days"));
 function durationBetweenDates(
     startDate = new Date(),
     endDate = new Date(new Date().getDate() + 1), 
-    units = "days") {
+    units = "days"
+    ) {
 
-    startDate = Date.parse(startDate);
-    endDate = Date.parse(endDate);
-
-    let duration = endDate - startDate;
+    let duration = (Date.parse(endDate) - Date.parse(startDate)) / 1000;
     let result;
+
 
     switch (units) {
         case "days":
-            result = duration/1000/3600/24;
+            result = duration/3600/24;
             break;
         case "hours":
-            result = duration/1000/3600;
+            result = duration/3600;
             break;
         case "minutes":
-            result = duration/1000/60;
+            result = duration/60;
             break;
         case "seconds":
-            result = duration/1000;
+            result = duration;
             break;
     }
 
