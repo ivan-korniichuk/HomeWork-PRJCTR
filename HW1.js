@@ -11,7 +11,7 @@ initials.sort();
 
 console.log(initials);
 
-//#2
+// #2
 
 const currentMaxValue = 4589;
 let reverseMaxValue;
