@@ -89,8 +89,8 @@ function byProperty(property, direction) {
 
 //#4
 
-detonatorTimer1(3);
-detonatorTimer2(3);
+// detonatorTimer1(3);
+// detonatorTimer2(3);
 
 function detonatorTimer1 (delay) {
     if(delay <= 0){
@@ -117,6 +117,8 @@ function detonatorTimer2 (delay) {
         }
     }
 }
+
+//#5
 
 let player = {
     name: "Ivan",
@@ -147,6 +149,41 @@ let player = {
     }
 }
     
-player.introduce();
-player.describeMyself();
-player.showMyItems();
+// player.introduce();
+// player.describeMyself();
+// player.showMyItems();
+
+//#6
+
+let securedSelfIntroduce = player.introduce.bind(player);// якийсь код
+let securedSelfdescribeMyself = player.describeMyself.bind(player);// якийсь код
+let securedSelfshowMyItems = player.showMyItems.bind(player);// якийсь код
+
+player = {};
+
+// setTimeout(securedSelfIntroduce, 1000); // виведе коректний результат
+// setTimeout(securedSelfdescribeMyself, 2000); // виведе коректний результат
+// setTimeout(securedSelfshowMyItems, 3000); // виведе коректний результат
+
+//#7
+
+function someFunction (a, b) { // тут напишіть довільну функцію яка робить якусь роботу зі своїми аргументами та виводить результат в консоль
+    console.log(a > b);
+}
+
+function slower (func, seconds) {
+    console.log("Chill out, you will get you result in 5 seconds");
+
+    function wrapper(...args) {
+        setTimeout(() => {func.apply(this, args);}, seconds*1000)
+    }
+
+    return wrapper
+}
+
+let slowedSomeFunction = slower(someFunction, 5); // обгортаєте свою довільну функцію 'someFunction' в декоратор*
+
+slowedSomeFunction(3,2) // викликаєте декоратор*
+
+// виведе в консоль "Chill out, you will get you result in 5 seconds"
+//...через 5 секунд виведе результат роботи 'someFunction*'
