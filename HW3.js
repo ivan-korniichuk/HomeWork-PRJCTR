@@ -5,28 +5,16 @@ console.log(addThemAll(1,2,3,4)); // 10
 console.log(addThemAll(5,5,10)); // 20
 
 function addThemAll(...args) {
-    let sum = 0;
-
-    for (let arg of args) {
-        sum += arg;
-    }
-
-    return sum;
+    return args.reduce((prev, current) => prev + current);
 }
 
 //#2
 
+const multiply = (a) => (b) => a *= b;
+
 console.log(multiply(5)(5))		// 25
 console.log(multiply(2)(-2))	// -4
 console.log(multiply(4)(3))		// 12
-
-function multiply(a) {
-    let product = a;
-
-    return function (b) {
-        return product *= b;
-    }
-}
 
 //#3
 
@@ -57,10 +45,6 @@ const movies = [
 },
 ];
 
-console.log(movies.sort(byProperty("releaseYear", "<"))); // виведе масив фільмів посортованих по року випуску, від старішого до новішого
-console.log(movies.sort(byProperty("runningTimeInMinutes", "<"))); // виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого
-console.log(movies.sort(byProperty("movieName", ">"))); // виведе масив фільмів посортованих по назві, в алфавітному порядку
-
 function byProperty(property, direction) {
     return function (a, b) {
         let firstParametr;
@@ -68,12 +52,12 @@ function byProperty(property, direction) {
 
         switch (direction) {
             case ">":
-                firstParametr = b;
-                secondParametr = a;
-                break;
-            case "<":
                 firstParametr = a;
                 secondParametr = b;
+                break;
+            case "<":
+                firstParametr = b;
+                secondParametr = a;
                 break;
         }
         switch (property) {
@@ -87,27 +71,31 @@ function byProperty(property, direction) {
     }
 }
 
+console.log(movies.sort(byProperty("releaseYear", ">"))); // виведе масив фільмів посортованих по року випуску, від старішого до новішого
+console.log(movies.sort(byProperty("runningTimeInMinutes", "<"))); // виведе масив фільмів посортованих по їх тривалості, від найдовшого до найкоротшого
+console.log(movies.sort(byProperty("movieName", ">"))); // виведе масив фільмів посортованих по назві, в алфавітному порядку
+
 //#4
 
 // detonatorTimer1(3);
 // detonatorTimer2(3);
 
 function detonatorTimer1 (delay) {
-    if(delay <= 0){
-        console.log("Boom!");
-        return;
-    }
-
     console.log(delay--);
 
-    setTimeout(detonatorTimer1, 1000, delay);
+    setTimeout(function timer() {
+        if(delay <= 0){
+            console.log("Boom!");
+            return;
+        }
+        console.log(delay--);
+        setTimeout(timer, 1000);
+    }, 1000);
 }
 
 function detonatorTimer2 (delay) {
     console.log(delay--);
-    let timerId = setInterval(timer, 1000);
-
-    function timer () {
+    let timerId = setInterval(() => {
         if (delay <= 0){
             console.log("Boom!!");
             clearInterval(timerId);
@@ -115,7 +103,7 @@ function detonatorTimer2 (delay) {
         else {
             console.log(delay--);
         }
-    }
+    }, 1000);
 }
 
 //#5
@@ -172,10 +160,10 @@ function someFunction (a, b) { // тут напишіть довільну фу�
 }
 
 function slower (func, seconds) {
-    console.log("Chill out, you will get you result in 5 seconds");
-
     function wrapper(...args) {
-        setTimeout(() => {func.apply(this, args);}, seconds*1000)
+        console.log("Chill out, you will get you result in 5 seconds");
+
+        setTimeout(() => {func.apply(this, args);}, seconds*1000);
     }
 
     return wrapper
@@ -183,7 +171,7 @@ function slower (func, seconds) {
 
 let slowedSomeFunction = slower(someFunction, 5); // обгортаєте свою довільну функцію 'someFunction' в декоратор*
 
-slowedSomeFunction(3,2) // викликаєте декоратор*
+//slowedSomeFunction(3,2) // викликаєте декоратор
 
 // виведе в консоль "Chill out, you will get you result in 5 seconds"
 //...через 5 секунд виведе результат роботи 'someFunction*'
