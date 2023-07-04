@@ -6,14 +6,8 @@ console.log(headerTwo);
 let section = document.querySelector("section");
 console.log(section);
 
-let li;
+let li = document.querySelectorAll("ul > li")[4];
 
-for (const element of document.querySelectorAll("ul > li")) {
-    if (element.innerHTML === "Пункт 5") {
-        li = element;
-        break;
-    }
-}
 console.log(li);
 
 let spanWithClass = document.getElementsByClassName("hatredLevelCounter");

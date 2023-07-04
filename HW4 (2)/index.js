@@ -9,10 +9,11 @@ let switcher = document.querySelector(".switcher");
 let body = document.querySelector("body");
 let timeText = document.querySelector(".time");
 
-setTime(data.turnedOn);
-switcher.addEventListener("click", changeTime)
+timeText.innerHTML = data.timeStamp;
 
-function changeTime() {
+switcher.addEventListener("click", changeTimeMode)
+
+function changeTimeMode() {
     if (data.turnedOn) {
         data.turnedOn = false;
         data.timeStamp = "Last turn off: " + getDateNow();
@@ -20,28 +21,15 @@ function changeTime() {
         data.turnedOn = true;
         data.timeStamp = "Last turn on: " + getDateNow();
     }
-    setTime(data.turnedOn);
+    timeText.innerHTML = data.timeStamp;
+    switchStyle(data.turnedOn);
     localStorage.setItem("data", JSON.stringify(data));
 }
 
-function setTime(turnedOn) {
-    if (turnedOn) {
-        body.style.backgroundColor = "white";
-        switcher.style.backgroundColor = "black";
-        switcher.style.color = "white";
-        switcher.innerHTML = "Turn off";
-
-        timeText.innerHTML = data.timeStamp;
-        timeText.style.color = "black";
-    } else {
-        body.style.backgroundColor = "black";
-        switcher.style.backgroundColor = "white";
-        switcher.style.color = "black";
-        switcher.innerHTML = "Turn on";
-
-        timeText.innerHTML = data.timeStamp;
-        timeText.style.color = "white";
-    }
+function switchStyle() {
+    body.classList.toggle("dark-mode");
+    switcher.classList.toggle("dark-mode");
+    timeText.classList.toggle("dark-mode");
 }
 
 function getDateNow() {
