@@ -1,33 +1,43 @@
-const data = localStorage.getItem("data") || localStorage.getItem("data") === {} ? 
-JSON.parse(localStorage.getItem("data")) :
-{
-    timeStamp: "",
-    turnedOn: true,
-};
+let timeStamp = localStorage.getItem("timeStamp") ||  "";
+let turnedOn;
+
+if (localStorage.getItem("turnedOn") === "false"){
+    turnedOn = false;
+} else {
+    turnedOn = true;
+}
 
 const switcher = document.querySelector(".switcher");
 const body = document.querySelector("body");
 const timeText = document.querySelector(".time");
 
-timeText.innerHTML = data.timeStamp;
+timeText.innerHTML = timeStamp;
+
+if(turnedOn === true) {
+    switcher.innerHTML = "Turn off";
+} else {
+    body.classList.add("dark-mode");
+    switcher.innerHTML = "Turn on";
+}
 
 switcher.addEventListener("click", changeTimeMode)
 
 function changeTimeMode() {
-    if (data.turnedOn) {
-        data.turnedOn = false;
-        data.timeStamp = "Last turn off: " + getDateNow();
+    if (turnedOn) {
+        turnedOn = false;
+        timeStamp = "Last turn off: " + getDateNow();
+        switcher.innerHTML = "Turn on";
     } else {
-        data.turnedOn = true;
-        data.timeStamp = "Last turn on: " + getDateNow();
+        turnedOn = true;
+        timeStamp = "Last turn on: " + getDateNow();
+        switcher.innerHTML = "Turn off";
     }
-    timeText.innerHTML = data.timeStamp;
-    switchStyle();
-    localStorage.setItem("data", JSON.stringify(data));
-}
-
-function switchStyle() {
+    timeText.innerHTML = timeStamp;
+    
     body.classList.toggle("dark-mode");
+
+    localStorage.setItem("turnedOn", turnedOn);
+    localStorage.setItem("timeStamp", timeStamp);
 }
 
 function getDateNow() {
