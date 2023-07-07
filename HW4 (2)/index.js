@@ -5,9 +5,9 @@ JSON.parse(localStorage.getItem("data")) :
     turnedOn: true,
 };
 
-let switcher = document.querySelector(".switcher");
-let body = document.querySelector("body");
-let timeText = document.querySelector(".time");
+const switcher = document.querySelector(".switcher");
+const body = document.querySelector("body");
+const timeText = document.querySelector(".time");
 
 timeText.innerHTML = data.timeStamp;
 
@@ -22,14 +22,12 @@ function changeTimeMode() {
         data.timeStamp = "Last turn on: " + getDateNow();
     }
     timeText.innerHTML = data.timeStamp;
-    switchStyle(data.turnedOn);
+    switchStyle();
     localStorage.setItem("data", JSON.stringify(data));
 }
 
 function switchStyle() {
     body.classList.toggle("dark-mode");
-    switcher.classList.toggle("dark-mode");
-    timeText.classList.toggle("dark-mode");
 }
 
 function getDateNow() {

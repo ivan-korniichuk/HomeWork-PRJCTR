@@ -14,7 +14,7 @@ body {
     color: white;
 }
 
-.switcher.dark-mode {
+body.dark-mode .switcher {
     background-color: white;
     color: black;
 }
@@ -25,7 +25,12 @@ body {
     color: black;
 }
 
-.dark-mode {
+body.dark-mode .time {
+    background-color: black;
+    color: white;
+}
+
+.dark-mode  {
     background-color: black;
     color: white;
 }

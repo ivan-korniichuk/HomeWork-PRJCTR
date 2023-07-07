@@ -1,14 +1,14 @@
 //#1
 
-let headerTwo = document.getElementById("headerTwo");
+const headerTwo = document.getElementById("headerTwo");
 console.log(headerTwo);
 
-let section = document.querySelector("section");
+const section = document.querySelector("section");
 console.log(section);
 
-let li = document.querySelectorAll("ul > li")[4];
+const li = document.querySelector("ul").lastElementChild.previousElementSibling;
 
 console.log(li);
 
-let spanWithClass = document.getElementsByClassName("hatredLevelCounter");
-console.log(section);
+const spanWithClass = document.getElementsByClassName("hatredLevelCounter")[0];
+console.log(spanWithClass);
