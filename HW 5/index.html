@@ -16,9 +16,9 @@
       <h3 class="task-title">Нове завдання</h3>
       <div class="input-field">
         <label>
-          <input type="text" name="task" class="task-input">
+          <input type="text" name="task" class="task-input" placeholder="Введіть завдання">
         </label>
-        <button type="submit" class="btn">Додати завдання</button>
+        <button type="submit" class="add-task">Додати завдання</i></button>
       </div>
     </form>
   </div>
@@ -26,11 +26,11 @@
 
   <div class="filter-task-block">
     <h3 class="task-title">Список завдань</h3>
+    <button class="clear-tasks">Видалити всі завдання</button>
     <div class="input-field">
-      <label>
+      <label hidden>
         <input type="text" name="filter" class="filter-input" placeholder="Пошук завдань">
       </label>
-      <button class="clear-tasks">Видалити всі завдання</button>
     </div>
     <ul class="collection"></ul>
   </div>
