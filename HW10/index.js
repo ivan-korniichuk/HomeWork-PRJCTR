@@ -11,9 +11,7 @@ const input = document.querySelector(".item-input");
 const form = document.querySelector(".add-item-form");
 
 form.addEventListener("submit", event => addItem(event));
-
-displaySetAndArray(array, set);
-addRandomEmojiToInput();
+window.onload = onLoad;
 
 function addItem(event) {
     event.preventDefault();
@@ -29,4 +27,9 @@ function addItem(event) {
 
 function addRandomEmojiToInput() {
     input.value = getRandomEmoji();
+}
+
+function onLoad() {
+    displaySetAndArray(array, set);
+    addRandomEmojiToInput();
 }
