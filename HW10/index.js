@@ -2,6 +2,7 @@
 
 import { getRandomEmojiArray } from "./getRandomEmojiArray.js";
 import { displaySetAndArray } from "./displaySetAndArray.js";
+import { getRandomEmoji } from "./getRandomEmoji.js";
 
 let array = getRandomEmojiArray();
 let set = new Set(array);
@@ -12,6 +13,7 @@ const form = document.querySelector(".add-item-form");
 form.addEventListener("submit", event => addItem(event));
 
 displaySetAndArray(array, set);
+addRandomEmojiToInput();
 
 function addItem(event) {
     event.preventDefault();
@@ -21,5 +23,10 @@ function addItem(event) {
         set.add(inputValue);
 
         displaySetAndArray(array, set);
+        addRandomEmojiToInput();
     }
+}
+
+function addRandomEmojiToInput() {
+    input.value = getRandomEmoji();
 }
